@@ -8,7 +8,7 @@ namespace SnakeStateMachine
     {
 
         private static int _playgroundheigt = 19;
-        private static int _playgroundwidth = 19;
+        private static int _playgroundwidth = 38;
         private char[,] _playground = new char[_playgroundheigt, _playgroundwidth];
         private int[] _snake = new int[2];
  
@@ -19,6 +19,11 @@ namespace SnakeStateMachine
         }
 
         public Playground()
+        {
+            resetpos();
+        }
+
+        private void resetpos()
         {
             _snake[0] = (_playgroundheigt / 2);
             _snake[1] = (_playgroundwidth / 2);
@@ -32,7 +37,6 @@ namespace SnakeStateMachine
                 for (int j = 0; j < _playground.GetLength(1); j++)
                 {
                     Console.Write(_playground[i,j]);
-                    Console.Write(" ");
                 }
                 Console.WriteLine();
             }
@@ -61,25 +65,34 @@ namespace SnakeStateMachine
                 _snake[1] = _snake[1] + 1;
             }
 
-            Console.Clear();
-
-            for (int i = 0; i < _playground.GetLength(0); i++)
+            if (_snake[0] == 0 || _snake[0] == _playgroundheigt -1  || _snake[1] == 0 || _snake[1] == _playgroundwidth - 1)
             {
-                _playground[i, 0] = 'X';
-                _playground[i, _playground.GetLength(1) - 1] = 'X';
-                for (int j = 0; j < _playground.GetLength(1); j++)
-                {
-                    _playground[0, j] = 'X';
-                    _playground[_playground.GetLength(0)-1, j] = 'X';
-
-                    _playground[_snake[0], _snake[1]] = 'O';
-                }
+                Console.WriteLine("du død");
+                resetpos();
             }
+            else
+            {
+                Console.Clear();
+
+                for (int i = 0; i < _playground.GetLength(0); i++)
+                {
+                    _playground[i, 0] = 'X';
+                    _playground[i, _playground.GetLength(1) - 1] = 'X';
+                    for (int j = 0; j < _playground.GetLength(1); j++)
+                    {
+                        _playground[0, j] = 'X';
+                        _playground[_playground.GetLength(0) - 1, j] = 'X';
+
+                        _playground[_snake[0], _snake[1]] = 'O';
+                    }
+                }
 
 
 
-            Console.Write(_snake[0]);
-            Console.WriteLine(_snake[1]);
+                Console.Write(_snake[0]);
+                Console.WriteLine(_snake[1]);
+            }
+            
 
         }
     }

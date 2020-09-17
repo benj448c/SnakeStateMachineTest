@@ -14,7 +14,7 @@ namespace SnakeStateMachine
         {
             snake = new SnakeStateMachine();
             pg = new Playground();
-            Task.Run((() => { moving(); }));
+            Task.Run(() => { moving(); });
             while (true)
             {
                 Thread.Sleep(500);
