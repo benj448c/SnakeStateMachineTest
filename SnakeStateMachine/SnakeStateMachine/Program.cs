@@ -9,6 +9,7 @@ namespace SnakeStateMachine
             Console.WriteLine("Hello World!");
             worker worker1 = new worker();
             worker1.Start();
+            Console.Read();
         }
     }
 }
